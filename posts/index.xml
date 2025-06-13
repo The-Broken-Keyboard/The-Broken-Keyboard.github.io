@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Posts on The-Broken-Keyboard</title>
+    <link>https://the-broken-keyboard.github.io/posts/</link>
+    <description>Recent content in Posts on The-Broken-Keyboard</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <copyright>© Copyright notice</copyright>
+    <lastBuildDate>Fri, 13 Jun 2025 22:29:21 +0530</lastBuildDate>
+    <atom:link href="https://the-broken-keyboard.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>GSoC 2025: My Journey with ArviZ</title>
+      <link>https://the-broken-keyboard.github.io/posts/gsoc/</link>
+      <pubDate>Fri, 13 Jun 2025 22:29:21 +0530</pubDate>
+      <guid>https://the-broken-keyboard.github.io/posts/gsoc/</guid>
+      <description>&lt;p&gt;&lt;img src=&#34;https://github.com/The-Broken-Keyboard/The-Broken-Keyboard.github.io/blob/main/images/logos.png?raw=true&#34; alt=&#34;NumFOCUS Logo&#34;&gt;&lt;/p&gt;&#xA;&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;&#xA;&lt;p&gt;This is a biweekly blog series chronicling my 12-week journey as a GSoC contributor this summer - a space where I’ll be documenting key milestones, reflections, and learnings from the project.&lt;/p&gt;&#xA;&lt;h3 id=&#34;what-is-gsoc&#34;&gt;What is GSoC?&lt;/h3&gt;&#xA;&lt;p&gt;Google Summer of Code is a global program that pairs contributors with open source organizations to work on impactful coding projects over the summer. For many, it&amp;rsquo;s a first dive into real-world, collaborative software development - beyond classroom assignments or personal repos. GSoC offers mentorship, a stipend, and most importantly, the experience of writing code that matters. You don’t just fix bugs or add features; you contribute to projects used by people around the world. It’s a rewarding blend of challenge, learning, and purpose - and a chance to give back to the open source community that powers so much of the tech we rely on.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>
