@@ -97,7 +97,7 @@ What is GSoC? Google Summer of Code is a global program that pairs contributors 
 <p>Google Summer of Code is a global program that pairs contributors with open source organizations to work on impactful coding projects over the summer. For many, it&rsquo;s a first dive into real-world, collaborative software development - beyond classroom assignments or personal repos. GSoC offers mentorship, a stipend, and most importantly, the experience of writing code that matters. You don’t just fix bugs or add features; you contribute to projects used by people around the world. It’s a rewarding blend of challenge, learning, and purpose - and a chance to give back to the open source community that powers so much of the tech we rely on.</p>
 <h3 id="arviz-and-my-project">ArviZ and My Project</h3>
 <p>For my GSoC <a href="https://summerofcode.withgoogle.com/programs/2025/projects/QEEVWGcd">project</a>, I am contributing to ArviZ, a Python library for the exploratory analysis and visualization of Bayesian inference models. These models are built on the principles of Bayesian statistics, where prior beliefs are combined with observed data to update our understanding of unknown parameters. Unlike traditional models that provide single-point estimates, Bayesian models yield full probability distributions, capturing uncertainty in a more nuanced way. ArviZ helps visualize these complex outputs and provides essential tools for model diagnostics, comparison, and criticism.
-The project I&rsquo;m working on focuses on the ongoing refactor of ArviZ into a modular structure-specifically contributing to arviz-plots. My goal is to migrate and enhance core visualization tools from the original ArviZ, such as pair_plot, parallel_plot etc, while introducing new features like dark mode and improved support for circular variables in trace plot.
+The project I&rsquo;m working on focuses on the ongoing refactor of ArviZ into a modular structure-specifically contributing to arviz-plots. My goal is to migrate and enhance core visualization tools from the original ArviZ, such as <strong>pair_plot</strong>, <strong>parallel_plot</strong> etc, while introducing new features like dark mode and improved support for circular variables in trace plot.
 The mentors of my project are <a href="https://github.com/aloctavodia">Osvaldo A Martin</a>, <a href="https://github.com/OriolAbril">Oriol Abril Pla</a> and <a href="https://github.com/rohanbabbar04">Rohan Babbar</a></p>
 <p>For further knowledge about ArviZ, you could refer to <a href="https://arviz-plots.readthedocs.io/en/latest/">the documentation</a></p>
 <h2 id="bonding-period-may-8---june-2">Bonding Period (May 8 - June 2)</h2>
@@ -105,7 +105,7 @@ The mentors of my project are <a href="https://github.com/aloctavodia">Osvaldo A
 <p>While many plotting functions had already been ported to arviz-plots, several features from the legacy implementation were still missing-primarily because they hadn’t been an immediate priority or say they were not required in immediate future. For instance, the groupby functionality in plot_ppc had not yet been implemented.</p>
 <p>My focus during the bonding period was to carefully identify and document these gaps. After conducting a detailed comparison of the plotting functions between the two versions and engaging in several discussions with my mentors, I compiled a prioritized list of features to work on during the coding phase of GSoC.</p>
 <h2 id="week-1--2-june-2---june-15">Week 1 &amp; 2 (June 2 - June 15)</h2>
-<p>The GSoC coding period officially began on June 2nd, 2025, and my first task was to implement the pair_focus_plot function in arviz-plots. Although I had been contributing to ArviZ since February-mainly in the backend folder, where I worked on features like step_histogram and support for square root scaling across Matplotlib, Plotly, and Bokeh-this was my first major contribution involving a new batteries-included plot.</p>
+<p>The GSoC coding period officially began on June 2nd, 2025, and my first task was to implement the <strong>pair_focus_plot</strong> function in arviz-plots. Although I had been contributing to ArviZ since February-mainly in the backend folder, where I worked on features like step_histogram and support for square root scaling across Matplotlib, Plotly, and Bokeh-this was my first major contribution involving a new batteries-included plot.</p>
 <p>Unlike the isolated features I had worked on earlier, adding a full plotting function in arviz-plots required a deeper understanding of the library&rsquo;s internal design, especially the faceting and aesthetic mapping managers: PlotCollection and PlotMatrix. These managers abstract much of the complexity of arranging plots, handling aesthetics, and coordinating behavior across subplots.</p>
 <p>To get up to speed, I spent considerable time studying the ArviZ-Plots <a href="https://arviz-plots.readthedocs.io/en/latest/api/managers.html">documentation</a>, experimenting with different manager methods such as <code>.wrap()</code>, <code>.grid()</code>, and <code>.map()</code>. Each serves a distinct purpose:</p>
 <ul>
@@ -115,13 +115,13 @@ The mentors of my project are <a href="https://github.com/aloctavodia">Osvaldo A
 </ul>
 <p>I also dove into the <code>DataTree</code> structure, which is used internally to represent hierarchical data in ArviZ. Understanding how to navigate and manipulate this data was essential for writing a reliable and flexible plotting function.</p>
 <h3 id="what-is-pair_focus_plot">What is pair_focus_plot?</h3>
-<p>The <code>pair_focus_plot</code> function creates visualizations to explore relationships between a focus variable and several other variables. It includes:</p>
+<p>The <strong>pair_focus_plot</strong> function creates visualizations to explore relationships between a focus variable and several other variables. It includes:</p>
 <ul>
 <li>A <strong>scatter plot</strong> for the focus variable vs. each other variable</li>
 <li>A <strong>divergence scatter plot</strong> highlighting divergent samples</li>
 <li><strong>X and Y axis labels</strong></li>
 </ul>
-<p>To calculate the divergence mask, I referred to the implementation in the trace_plot function. After thoroughly testing different parameter combinations and edge cases with the PlotCollection manager, I was able to implement pair_focus_plot successfully.</p>
+<p>To calculate the divergence mask, I referred to the implementation in the trace_plot function. After thoroughly testing different parameter combinations and edge cases with the PlotCollection manager, I was able to implement <strong>pair_focus_plot</strong> successfully.</p>
 <h3 id="challenges-faced">Challenges Faced</h3>
 <p><strong>Axis Sharing :</strong></p>
 <p>One of the design challenges involved axis and label sharing. Depending on the context:</p>
@@ -141,14 +141,14 @@ However, in our current design choice, Plotly always forces shared labels along 
 </ul>
 <p>After wrapping up the implementation, documentation, and testing for pair_focus_plot, I moved on to my next task: <strong>implementing the pair_plot function</strong>.</p>
 <h3 id="continuing-with-pair_plot-all-variables-all-at-once">Continuing with pair_plot: All Variables, All At Once</h3>
-<p>After completing pair_focus_plot, my next task was to implement pair_plot in arviz-plots. Conceptually, it’s similar to pair_focus_plot, but instead of plotting one focus variable against others, pair_plot visualizes all variables against each other. Each cell in the resulting grid displays a scatter plot of a variable pair, with additional support for highlighting divergent samples-just like in pair_focus_plot. Labels for rows and columns are added along the diagonal to help identify the plotted variables.</p>
+<p>After completing <strong>pair_focus_plot</strong>, my next task was to implement <strong>pair_plot</strong> in arviz-plots. Conceptually, it’s similar to <strong>pair_focus_plot</strong>, but instead of plotting one focus variable against others, <strong>pair_plot</strong> visualizes all variables against each other. Each cell in the resulting grid displays a scatter plot of a variable pair, with additional support for highlighting divergent samples-just like in <strong>pair_focus_plot</strong>. Labels for rows and columns are added along the diagonal to help identify the plotted variables.</p>
 <h3 id="getting-comfortable-with-plotmatrix">Getting Comfortable with PlotMatrix</h3>
 <p>Since this plot required creating a full matrix of plots, I shifted focus from PlotCollection to the PlotMatrix faceting manager. I spent some time getting comfortable with its methods and behavior-particularly how it manages grid construction and handles aesthetics across the matrix. Once I was confident with the API and internal flow, I began the implementation</p>
 <h3 id="a-key-challenge-handling-divergence-masks-using-plotmatrix">A Key Challenge: Handling Divergence Masks using PlotMatrix</h3>
 <p>One interesting challenge I faced during this implementation was related to how PlotMatrix.map() works. Internally, it passes kwargs argument to the visual function by directly merging it into fun_kwargs. However, this becomes tricky when dealing with the divergence mask.</p>
 <p>We only want to pass the relevant subset of the divergence mask corresponding to the current pair of variables being plotted-not the full mask. Initially, this wasn’t working as expected, and divergent data points weren’t being visualized.</p>
 <p>To fix this, I modified the way divergence masks were passed so that only the appropriate slice of the mask reached the visual function. Once this adjustment was in place, the divergence scatter plots rendered correctly across the matrix.</p>
-<p>I will be adding documentation and tests for pair_plot in the coming weeks.</p>
+<p>I will be adding documentation and tests for <strong>pair_plot</strong> in the coming weeks.</p>
 
 			</div>
 
@@ -156,27 +156,12 @@ However, in our current design choice, Plotly always forces shared labels along 
 				
 					
 				
-			</div><div id="disqus_thread"></div>
-<script type="text/javascript">
-	(function () {
-		
-		
-		if (window.location.hostname == "localhost")
-			return;
-
-		var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-		var disqus_shortname = 'ink-demo';
-		dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-		(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-	})();
-</script>
-<noscript>Please enable JavaScript to view the </a></noscript>
-<a href="http://disqus.com/" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+			</div>
 </div>
 	</div>
 	<div class="footer wrapper">
 	<nav class="nav">
-		<div>2025  © Copyright notice |  <a href="https://github.com/knadh/hugo-ink">Ink</a> theme on <a href="https://gohugo.io">Hugo</a></div>
+		<div>2025 visit <a href="https://github.com/The-Broken-Keyboard">My Profile</a> </div>
 	</nav>
 </div>
 
