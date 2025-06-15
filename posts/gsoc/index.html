@@ -9,7 +9,7 @@
 What is GSoC? Google Summer of Code is a global program that pairs contributors with open source organizations to work on impactful coding projects over the summer. For many, it’s a first dive into real-world, collaborative software development - beyond classroom assignments or personal repos. GSoC offers mentorship, a stipend, and most importantly, the experience of writing code that matters. You don’t just fix bugs or add features; you contribute to projects used by people around the world. It’s a rewarding blend of challenge, learning, and purpose - and a chance to give back to the open source community that powers so much of the tech we rely on.">
   <meta itemprop="datePublished" content="2025-06-13T22:29:21+05:30">
   <meta itemprop="dateModified" content="2025-06-13T22:29:21+05:30">
-  <meta itemprop="wordCount" content="1430"><meta property="og:url" content="https://the-broken-keyboard.github.io/posts/gsoc/">
+  <meta itemprop="wordCount" content="1451"><meta property="og:url" content="https://the-broken-keyboard.github.io/posts/gsoc/">
   <meta property="og:site_name" content="The-Broken-Keyboard">
   <meta property="og:title" content="GSoC 2025: My Journey with ArviZ">
   <meta property="og:description" content="Introduction This is a biweekly blog series chronicling my 12-week journey as a GSoC contributor this summer - a space where I’ll be documenting key milestones, reflections, and learnings from the project.
@@ -114,8 +114,8 @@ The mentors of my project are <a href="https://github.com/aloctavodia">Osvaldo A
 <li><code>.map()</code> applies the plotting function across all plots while respecting aesthetic mappings.</li>
 </ul>
 <p>I also dove into the <code>DataTree</code> structure, which is used internally to represent hierarchical data in ArviZ. Understanding how to navigate and manipulate this data was essential for writing a reliable and flexible plotting function.</p>
-<p>Following is the glimpse of posterior group of the <code>DataTree</code> I worked with:</p>
-<p><img src="" alt="Posterior Group"></p>
+<p>Following is a glimpse of posterior group of the <code>DataTree</code> I worked with:</p>
+<p><img src="https://github.com/The-Broken-Keyboard/The-Broken-Keyboard.github.io/blob/main/data_root.png?raw=true" alt="Posterior Group"></p>
 <h3 id="what-is-pair_focus_plot">What is pair_focus_plot?</h3>
 <p>The <strong>pair_focus_plot</strong> function creates visualizations to explore relationships between a focus variable and several other variables. It includes:</p>
 <ul>
@@ -160,7 +160,8 @@ However, in our current design choice, Plotly always forces shared labels along 
 </span></span><span style="display:flex;"><span>)
 </span></span><span style="display:flex;"><span>pc.show()
 </span></span></code></pre></div><h4 id="result">Result</h4>
-<p><img src="" alt="Pair Focus Plot"></p>
+<p>plotted <code>theta-choate</code> against <code>tau</code> and <code>theta</code> variables, with divergence highlighted.
+<img src="https://github.com/The-Broken-Keyboard/The-Broken-Keyboard.github.io/blob/main/pair_focus_plot.png?raw=true" alt="Pair Focus Plot"></p>
 <p>After wrapping up the implementation, documentation, and testing for pair_focus_plot, I moved on to my next task: <strong>implementing the pair_plot function</strong>.</p>
 <h3 id="continuing-with-pair_plot-all-variables-all-at-once">Continuing with pair_plot: All Variables, All At Once</h3>
 <p>After completing <strong>pair_focus_plot</strong>, my next task was to implement <strong>pair_plot</strong> in arviz-plots. Conceptually, it’s similar to <strong>pair_focus_plot</strong>, but instead of plotting one focus variable against others, <strong>pair_plot</strong> visualizes all variables against each other. Each cell in the resulting grid displays a scatter plot of a variable pair, with additional support for highlighting divergent samples-just like in <strong>pair_focus_plot</strong>. Labels for rows and columns are added along the diagonal to help identify the plotted variables.</p>
@@ -188,7 +189,8 @@ However, in our current design choice, Plotly always forces shared labels along 
 </span></span><span style="display:flex;"><span>)
 </span></span><span style="display:flex;"><span>pc.show()
 </span></span></code></pre></div><h4 id="result-1">Result</h4>
-<p><img src="" alt="Pair Plot Result"></p>
+<p>plotted <code>mu</code>,<code>tau</code>, <code>theta-choate</code> and <code>theta-deerfield</code> against each other, with divergence highlighted.</p>
+<p><img src="https://github.com/The-Broken-Keyboard/The-Broken-Keyboard.github.io/blob/main/pair_plot.png?raw=true" alt="Pair Plot Result"></p>
 <p>I will be adding documentation and tests for <strong>pair_plot</strong> in the coming weeks.</p>
 
 			</div>
