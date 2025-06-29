@@ -9,7 +9,7 @@
 What is GSoC? Google Summer of Code is a global program that pairs contributors with open source organizations to work on impactful coding projects over the summer. For many, it’s a first dive into real-world, collaborative software development - beyond classroom assignments or personal repos. GSoC offers mentorship, a stipend, and most importantly, the experience of writing code that matters. You don’t just fix bugs or add features; you contribute to projects used by people around the world. It’s a rewarding blend of challenge, learning, and purpose - and a chance to give back to the open source community that powers so much of the tech we rely on.">
   <meta itemprop="datePublished" content="2025-06-13T22:29:21+05:30">
   <meta itemprop="dateModified" content="2025-06-13T22:29:21+05:30">
-  <meta itemprop="wordCount" content="1451"><meta property="og:url" content="https://the-broken-keyboard.github.io/posts/gsoc/">
+  <meta itemprop="wordCount" content="1903"><meta property="og:url" content="https://the-broken-keyboard.github.io/posts/gsoc/">
   <meta property="og:site_name" content="The-Broken-Keyboard">
   <meta property="og:title" content="GSoC 2025: My Journey with ArviZ">
   <meta property="og:description" content="Introduction This is a biweekly blog series chronicling my 12-week journey as a GSoC contributor this summer - a space where I’ll be documenting key milestones, reflections, and learnings from the project.
@@ -188,6 +188,20 @@ However, in our current design choice, Plotly always forces shared labels along 
 <p>plotted <code>mu</code>,<code>tau</code>, <code>theta-choate</code> and <code>theta-deerfield</code> against each other, with divergence highlighted.</p>
 <p><img src="https://github.com/The-Broken-Keyboard/The-Broken-Keyboard.github.io/blob/main/pair_plot.png?raw=true" alt="Pair Plot Result"></p>
 <p>I will be adding documentation and tests for <strong>pair_plot</strong> in the coming weeks.</p>
+<h2 id="week-3--4-june-16---june-29">Week 3 &amp; 4 (June 16 - June 29)</h2>
+<h3 id="deep-dive-into-pair_plot-and-beyond">Deep Dive into <code>pair_plot</code> and Beyond</h3>
+<p>After kicking off <code>pair_plot</code> at the end of Week 2, I continued working on it through Weeks 3 and 4. While the concept initially seemed straightforward, implementing it turned out to be far more intricate. The challenge lay not just in plotting variable pairs, but in ensuring the visual output aligned with user expectations and supported features like flexible triangle types, axis sharing and diagonal marginals.</p>
+<h3 id="getting-comfortable-with-plotmatrix-1">Getting Comfortable with <strong>PlotMatrix</strong></h3>
+<p>Having just begun exploring <code>PlotMatrix</code> in the previous weeks, I spent more time getting familiar with its internals. Unlike <code>PlotCollection</code>, <code>PlotMatrix</code> offers specialized methods like <code>.map_triangle()</code> and <code>.map()</code> for targeting specific regions of the grid, including the diagonal. However, we also needed functionality to map a function across an entire row or column, which wasn’t directly supported out of the box.</p>
+<p>Initially, I attempted to create a new method called <code>map_row_col</code>, borrowing logic from <code>map_triangle</code>, to address this. While it worked, the approach introduced a lot of code duplication. After discussions with my mentors, we brainstormed a cleaner solution using the existing <code>.map()</code> method in combination with additional metadata. We ended up extending <code>PlotMatrix</code> with three new attributes - <code>orientation</code>, <code>fixed_var_name</code>, and <code>fixed_selection</code> - and adjusted the <code>get_target()</code> helper to support the new behavior. This allowed us to reuse existing logic efficiently and achieve the same result with cleaner code.</p>
+<h3 id="enhancing-the-diagonal-adding-marginals">Enhancing the Diagonal: Adding Marginals</h3>
+<p>The diagonal plots in <code>pair_plot</code> initially only displayed variable names as text labels, but we wanted to support marginal distributions by default. At first, I started implementing the marginal plots from scratch, but that led to unnecessary duplication. Eventually, we decided to reuse the existing <code>plot_dist</code> function, which made the implementation more consistent and modular.</p>
+<p>This refactor taught me a lot about good design practices—especially the importance of code reusability and maintaining clean abstraction layers. I found it incredibly rewarding to work through these challenges and get a deeper understanding of the design decisions behind ArviZ’s plotting architecture.</p>
+<h3 id="results">Results</h3>
+<h3 id="current-and-future-plan-from-violin-plot-to-parallel-plot">Current and future plan (From Violin Plot to Parallel Plot)</h3>
+<p>Once <code>pair_plot</code> was in good shape, I began working on a <code>violin plot</code>. However, after receiving feedback from several contributors, we decided to drop the <code>violin plot</code> in favor of focusing on more impactful visualizations.</p>
+<p>I then shifted to implementing the <code>parallel plot</code>, which I’m currently working on. Additionally, a new task was added to my to-do list: implementing filled faces in <code>plot_dist</code>, which I’ll be tackling after the <code>parallel plot</code> is complete.</p>
+<p>These past two weeks were packed with problem-solving, learning, and refining-giving me a much clearer picture of ArviZ&rsquo;s plotting system and how to contribute effectively to its evolving modular structure.</p>
 
 			</div>
 
