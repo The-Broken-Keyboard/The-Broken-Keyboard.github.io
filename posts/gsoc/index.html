@@ -9,7 +9,7 @@
 What is GSoC? Google Summer of Code is a global program that pairs contributors with open source organizations to work on impactful coding projects over the summer. For many, it’s a first dive into real-world, collaborative software development - beyond classroom assignments or personal repos. GSoC offers mentorship, a stipend, and most importantly, the experience of writing code that matters. You don’t just fix bugs or add features; you contribute to projects used by people around the world. It’s a rewarding blend of challenge, learning, and purpose - and a chance to give back to the open source community that powers so much of the tech we rely on.">
   <meta itemprop="datePublished" content="2025-06-13T22:29:21+05:30">
   <meta itemprop="dateModified" content="2025-06-13T22:29:21+05:30">
-  <meta itemprop="wordCount" content="2009"><meta property="og:url" content="https://the-broken-keyboard.github.io/posts/gsoc/">
+  <meta itemprop="wordCount" content="2414"><meta property="og:url" content="https://the-broken-keyboard.github.io/posts/gsoc/">
   <meta property="og:site_name" content="The-Broken-Keyboard">
   <meta property="og:title" content="GSoC 2025: My Journey with ArviZ">
   <meta property="og:description" content="Introduction This is a biweekly blog series chronicling my 12-week journey as a GSoC contributor this summer - a space where I’ll be documenting key milestones, reflections, and learnings from the project.
@@ -100,7 +100,7 @@ The mentors of my project are <a href="https://github.com/aloctavodia">Osvaldo A
 <p>The GSoC bonding period began on May 8th (the day the results were announced) and continued until June 2nd. Prior to this, I had already been contributing to ArviZ since February, although there was a short pause in my activity due to my end-semester exams. During the bonding period, we had our onboarding meeting where we outlined the initial goals for the project. The first task was to investigate the differences between the plotting functionalities in the new arviz-plots package and the original ArviZ (now referred to as arviz-legacy).</p>
 <p>While many plotting functions had already been ported to arviz-plots, several features from the legacy implementation were still missing-primarily because they hadn’t been an immediate priority or say they were not required in immediate future. For instance, the groupby functionality in plot_ppc had not yet been implemented.</p>
 <p>My focus during the bonding period was to carefully identify and document these gaps. After conducting a detailed comparison of the plotting functions between the two versions and engaging in several discussions with my mentors, I compiled a prioritized list of features to work on during the coding phase of GSoC.</p>
-<h2 id="week-1--2-june-2---june-15">Week 1 &amp; 2 (June 2 - June 15)</h2>
+<h2 id="week-1--2-june-2---june-16">Week 1 &amp; 2 (June 2 - June 16)</h2>
 <p>The GSoC coding period officially began on June 2nd, 2025, and my first task was to implement the <strong>pair_focus_plot</strong> function in arviz-plots. Although I had been contributing to ArviZ since February-mainly in the backend folder, where I worked on features like step_histogram and support for square root scaling across Matplotlib, Plotly, and Bokeh-this was my first major contribution involving a new batteries-included plot.</p>
 <p>Unlike the isolated features I had worked on earlier, adding a full plotting function in arviz-plots required a deeper understanding of the library&rsquo;s internal design, especially the faceting and aesthetic mapping managers: PlotCollection and PlotMatrix. These managers abstract much of the complexity of arranging plots, handling aesthetics, and coordinating behavior across subplots.</p>
 <p>To get up to speed, I spent considerable time studying the ArviZ-Plots <a href="https://arviz-plots.readthedocs.io/en/latest/api/managers.html">documentation</a>, experimenting with different manager methods such as <code>.wrap()</code>, <code>.grid()</code>, and <code>.map()</code>. Each serves a distinct purpose:</p>
@@ -188,7 +188,7 @@ However, in our current design choice, Plotly always forces shared labels along 
 <p>plotted <code>mu</code>,<code>tau</code>, <code>theta-choate</code> and <code>theta-deerfield</code> against each other, with divergence highlighted.</p>
 <p><img src="https://github.com/The-Broken-Keyboard/The-Broken-Keyboard.github.io/blob/main/pair_plot.png?raw=true" alt="Pair Plot Result"></p>
 <p>I will be adding documentation and tests for <strong>pair_plot</strong> in the coming weeks.</p>
-<h2 id="week-3--4-june-16---june-29">Week 3 &amp; 4 (June 16 - June 29)</h2>
+<h2 id="week-3--4-june-17---july-1">Week 3 &amp; 4 (June 17 - July 1)</h2>
 <h3 id="deep-dive-into-pair_plot-and-beyond">Deep Dive into <code>pair_plot</code> and Beyond</h3>
 <p>After kicking off <code>pair_plot</code> at the end of Week 2, I continued working on it through Weeks 3 and 4. While the concept initially seemed straightforward, implementing it turned out to be far more intricate. The challenge lay not just in plotting variable pairs, but in ensuring the visual output aligned with user expectations and supported features like flexible triangle types, axis sharing and diagonal marginals.</p>
 <h3 id="getting-comfortable-with-plotmatrix-1">Getting Comfortable with <strong>PlotMatrix</strong></h3>
@@ -256,6 +256,28 @@ However, in our current design choice, Plotly always forces shared labels along 
 <p>Once <code>pair_plot</code> was in good shape, I began working on a <code>violin plot</code>. However, after receiving feedback from several contributors, we decided to drop the <code>violin plot</code> in favor of focusing on more impactful visualizations.</p>
 <p>I then shifted to implementing the <code>parallel plot</code>, which I’m currently working on. Additionally, a new task was added to my to-do list: implementing filled faces in <code>plot_dist</code>, which I’ll be tackling after the <code>parallel plot</code> is complete.</p>
 <p>These past two weeks were packed with problem-solving, learning, and refining-giving me a much clearer picture of ArviZ&rsquo;s plotting system and how to contribute effectively to its evolving modular structure.</p>
+<h2 id="week-5--6-june-2---july-16">Week 5 &amp; 6 (June 2 - July 16)</h2>
+<p>After we decided to drop the <code>violin_plot</code> task in the previous weeks, I shifted my focus to implementing the <code>parallel_plot</code>. While this plot didn’t require as many visual components as <code>pair_plot</code>, it came with its own unique challenges particularly around data structure and aesthetic management.</p>
+<h3 id="implementing-parallel_plot-a-structural-challenge">Implementing <code>parallel_plot</code>: A Structural Challenge</h3>
+<p>Unlike previous plots, <code>parallel_plot</code> required all variables to be plotted on the same coordinate system, meaning we needed to restructure the data into a format that could accommodate this layout. The solution - we arrived at after a lot of brainstorming with my mentor - was to stack the sampling dimensions into a single multi-indexed dimension called <code>sample</code>. This allowed each variable to be aligned along a common axis for the <code>parallel coordinates plot</code>.</p>
+<p>Once the structure was in place, we worked on several optimizations:</p>
+<ul>
+<li><strong>Divergence highlighting:</strong> By adding divergence information as a coordinate to the data, we were able to plot both <code>divergent</code> and <code>non-divergent</code> samples in a single call to <code>multiple_lines</code>, making the implementation cleaner and more efficient.</li>
+<li><strong>Tick label management:</strong> With many variables plotted along the x-axis, label collisions became an issue. We introduced label rotation to improve readability. However, long variable names still cause crowding and plot compression-something we’ve noted for future refinement.</li>
+</ul>
+<p>With these issues addressed, <code>parallel_plot</code> was complete and functioning as intended.</p>
+<h4 id="result-2">Result</h4>
+<p><img src="" alt="Parallel Plot Result"></p>
+<h3 id="enhancing-dist_plot-supporting-filled-distributions">Enhancing <code>dist_plot</code>: Supporting Filled Distributions</h3>
+<p>After wrapping up <code>parallel_plot</code>, I moved on to enhancing <code>dist_plot</code> to support <strong>filled faces</strong> (shaded areas under the curve), in addition to the existing line-based visualizations like KDE, ECDF, and histogram lines.</p>
+<p>This enhancement, while seemingly simple, had its own complexities. Since <code>dist_plot</code> is used internally by many other plotting functions-each passing its own set of aesthetic mappings-we had to ensure that filled faces respected all existing aesthetic variations. After carefully handling these edge cases, <code>dist_plot</code> now supports filled visuals by default (with the option to disable them), making it more expressive and flexible.</p>
+<p>This change also opens the door to generalizing <code>ridge_plot</code> by making it use the updated <code>dist_plot</code>.</p>
+<h4 id="result-3">Result</h4>
+<p><img src="" alt="Filled Dist Plot Result"></p>
+<h3 id="behind-the-scenes-tests-and-docs">Behind the Scenes: Tests and Docs</h3>
+<p>In parallel with these implementations, I spent a significant amount of time refining documentation and improving tests for <code>pair_plot</code> and <code>parallel_plot</code>, ensuring better clarity, examples, and robust coverage.</p>
+<h3 id="future-plan">Future Plan</h3>
+<p>My next focus will be implementing a dark theme for ArviZ plots and I will also keep refining the works done till now wherever required.</p>
 
 			</div>
 
