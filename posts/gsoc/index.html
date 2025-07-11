@@ -267,13 +267,13 @@ However, in our current design choice, Plotly always forces shared labels along 
 </ul>
 <p>With these issues addressed, <code>parallel_plot</code> was complete and functioning as intended.</p>
 <h4 id="result-2">Result</h4>
-<p><img src="" alt="Parallel Plot Result"></p>
+<p><img src="https://github.com/The-Broken-Keyboard/The-Broken-Keyboard.github.io/blob/main/parallel.png?raw=true" alt="Parallel Plot Result"></p>
 <h3 id="enhancing-dist_plot-supporting-filled-distributions">Enhancing <code>dist_plot</code>: Supporting Filled Distributions</h3>
 <p>After wrapping up <code>parallel_plot</code>, I moved on to enhancing <code>dist_plot</code> to support <strong>filled faces</strong> (shaded areas under the curve), in addition to the existing line-based visualizations like KDE, ECDF, and histogram lines.</p>
 <p>This enhancement, while seemingly simple, had its own complexities. Since <code>dist_plot</code> is used internally by many other plotting functions-each passing its own set of aesthetic mappings-we had to ensure that filled faces respected all existing aesthetic variations. After carefully handling these edge cases, <code>dist_plot</code> now supports filled visuals by default (with the option to disable them), making it more expressive and flexible.</p>
 <p>This change also opens the door to generalizing <code>ridge_plot</code> by making it use the updated <code>dist_plot</code>.</p>
 <h4 id="result-3">Result</h4>
-<p><img src="" alt="Filled Dist Plot Result"></p>
+<p><img src="https://github.com/The-Broken-Keyboard/The-Broken-Keyboard.github.io/blob/main/filled_dist.png?raw=true" alt="Filled Dist Plot Result"></p>
 <h3 id="behind-the-scenes-tests-and-docs">Behind the Scenes: Tests and Docs</h3>
 <p>In parallel with these implementations, I spent a significant amount of time refining documentation and improving tests for <code>pair_plot</code> and <code>parallel_plot</code>, ensuring better clarity, examples, and robust coverage.</p>
 <h3 id="future-plan">Future Plan</h3>
