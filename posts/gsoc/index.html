@@ -9,7 +9,7 @@
 What is GSoC? Google Summer of Code is a global program that pairs contributors with open source organizations to work on impactful coding projects over the summer. For many, it’s a first dive into real-world, collaborative software development - beyond classroom assignments or personal repos. GSoC offers mentorship, a stipend, and most importantly, the experience of writing code that matters. You don’t just fix bugs or add features; you contribute to projects used by people around the world. It’s a rewarding blend of challenge, learning, and purpose - and a chance to give back to the open source community that powers so much of the tech we rely on.">
   <meta itemprop="datePublished" content="2025-06-13T22:29:21+05:30">
   <meta itemprop="dateModified" content="2025-06-13T22:29:21+05:30">
-  <meta itemprop="wordCount" content="3159"><meta property="og:url" content="https://the-broken-keyboard.github.io/posts/gsoc/">
+  <meta itemprop="wordCount" content="3547"><meta property="og:url" content="https://the-broken-keyboard.github.io/posts/gsoc/">
   <meta property="og:site_name" content="The-Broken-Keyboard">
   <meta property="og:title" content="GSoC 2025: My Journey with ArviZ">
   <meta property="og:description" content="Introduction This is a biweekly blog series chronicling my 12-week journey as a GSoC contributor this summer - a space where I’ll be documenting key milestones, reflections, and learnings from the project.
@@ -331,6 +331,48 @@ However, in our current design choice, Plotly always forces shared labels along 
 <h3 id="next-steps">Next Steps</h3>
 <p>Looking ahead, our focus will shift to implementing the <strong>plot_lm</strong> function. This function is designed to <strong>plot the  credible intervals and mean of posterior predictive</strong>, alongside a <strong>scatter plot of observed data</strong>, specifically for regression-like datasets.</p>
 <p>We also decided to pause work on dist_plot enhancements (such as <code>circular variable support</code> and <code>dot plots</code>), since there is already ongoing work in that file.</p>
+<h2 id="week-11--12-august-16---august-30">Week 11 &amp; 12 (August 16 - August 30)</h2>
+<p>During these weeks, we began implementing the <strong>plot_lm</strong> function. We initially decided that the plot should contain three main elements:</p>
+<ul>
+<li><strong>Confidence interval (CI) band</strong></li>
+<li><strong>Mean line</strong></li>
+<li><strong>Observation scatter plot</strong></li>
+</ul>
+<p>To create these elements, the function needs access to four types of data:</p>
+<ul>
+<li>Observations for the target variable</li>
+<li>Observations for the independent variable</li>
+<li>Predictions or posterior predictives</li>
+<li>Independent variables corresponding to the predictions/posterior predictives (used to generate the CI band and mean line)</li>
+</ul>
+<p>The most challenging part for me was understanding the structure of the data tree being used and the default behavior of the function. It took some time to fully grasp this, but once I did, I implemented the initial version of <strong>plot_lm</strong>.</p>
+<p>This initial implementation included:</p>
+<ul>
+<li>A <code>CI band</code> and <code>mean line</code>, calculated from either <code>predictions</code> or <code>posterior predictives</code> and their corresponding independent variables.
+<ol>
+<li>If <code>predictions</code> were used, the independent variable came from the <code>prediction_constant_data</code> group.</li>
+<li>If <code>posterior predictives</code> were used, the independent variable came from the <code>constant data</code> group ( independent variable corresponding to observed data).</li>
+</ol>
+</li>
+<li>A <code>scatter plot</code> of <code>observed data</code>, using the target variable from the <code>observed_data</code> group and the independent variable from the <code>constant_data</code> group.</li>
+</ul>
+<p>After this, we extended the functionality to support:</p>
+<ul>
+<li><strong>Multiple independent variables</strong></li>
+<li><strong>Multiple CI interval bands</strong></li>
+<li><strong>Median line</strong> as an alternative to the mean line</li>
+</ul>
+<p>This required some changes to the way we handled data structures, but since the foundation was well set up earlier, the extension was not too difficult.We added support for multiple independent variables ( now it could handle multiple independent variables like x1, x2, x3 &hellip; which are used to predict single target variable y) and multiple CI interval bands ( now we can plot 90% interval band along with a 50% interval band together ). Additionally, we extended functionality to support a median line (in addition to the mean line) for predictions or posterior predictives.</p>
+<p>We also discussed adding a smoothing function to smooth CI interval lines and mean lines. Once this function is implemented in <strong>arviz-stats</strong>, it can be easily integrated into <strong>plot_lm</strong>.</p>
+<h3 id="results-2">Results</h3>
+<h3 id="lm_plot-with-multiple-ci_bands-and-multiple-independent-variables">lm_plot with multiple ci_bands and multiple independent variables</h3>
+<p><img src="" alt="plot lm with multiple ci_bands"></p>
+<h3 id="lm_plot-with-single-ci_band-and-multiple-independent-variables">lm_plot with single ci_band and multiple independent variables</h3>
+<p><img src="" alt="plot lm with single ci_band"></p>
+<h3 id="lm_plot-with-single-ci_band-and-single-independent-variable">lm_plot with single ci_band and single independent variable</h3>
+<p><img src="" alt="plot lm with single ci_band and single independent variable"></p>
+<h3 id="ongoing-work">Ongoing Work</h3>
+<p>I am currently focusing on writing documentation and tests for the <strong>plot_lm</strong> function.</p>
 
 			</div>
 
