@@ -9,7 +9,7 @@
 What is GSoC? Google Summer of Code is a global program that pairs contributors with open source organizations to work on impactful coding projects over the summer. For many, it’s a first dive into real-world, collaborative software development - beyond classroom assignments or personal repos. GSoC offers mentorship, a stipend, and most importantly, the experience of writing code that matters. You don’t just fix bugs or add features; you contribute to projects used by people around the world. It’s a rewarding blend of challenge, learning, and purpose - and a chance to give back to the open source community that powers so much of the tech we rely on.">
   <meta itemprop="datePublished" content="2025-06-13T22:29:21+05:30">
   <meta itemprop="dateModified" content="2025-06-13T22:29:21+05:30">
-  <meta itemprop="wordCount" content="2854"><meta property="og:url" content="https://the-broken-keyboard.github.io/posts/gsoc/">
+  <meta itemprop="wordCount" content="3159"><meta property="og:url" content="https://the-broken-keyboard.github.io/posts/gsoc/">
   <meta property="og:site_name" content="The-Broken-Keyboard">
   <meta property="og:title" content="GSoC 2025: My Journey with ArviZ">
   <meta property="og:description" content="Introduction This is a biweekly blog series chronicling my 12-week journey as a GSoC contributor this summer - a space where I’ll be documenting key milestones, reflections, and learnings from the project.
@@ -313,6 +313,24 @@ However, in our current design choice, Plotly always forces shared labels along 
 <li>Resolving Bokeh’s subplot grid line issue.</li>
 <li>Implementing support for <strong>circular variables in dist_plot</strong>, expanding its flexibility even further.</li>
 </ul>
+<h2 id="week-9--10-august-1---august-15">Week 9 &amp; 10 (August 1 - August 15)</h2>
+<p>Over the past two weeks, we continued working on the <code>dark theme</code> implementation. One of the most challenging parts was designing a color cycle that would remain both <code>color-blind friendly</code> and have <code>good contrast against a dark background</code>. Initially, we aimed for a cycle of 10 unique colors, but after several iterations and testing with my mentor, we decided to reduce the cycle to 8 colors. Interestingly, this set of colors worked well on both light and dark backgrounds, so we unified the color cycles of the <code>arviz-variat</code> and <code>arviz-tumma</code> themes.</p>
+<p>Once the colors were finalized, the next hurdle was handling the hardcoded colors in the codebase. To make the visuals adapt dynamically based on the theme, we implemented two utility functions:</p>
+<ul>
+<li><strong>Backend function</strong> – returns the background color corresponding to the active theme.</li>
+<li><strong>Utility function</strong> – takes the background color and computes a contrasting color for text and other elements. This function can also return a contrasting gray variant if a <code>gray</code> flag is set. Internally, it calculates the <code>YIQ brightness value</code> of the background color to determine whether a light or dark contrasting color should be chosen.</li>
+</ul>
+<p>With these functions in place, we replaced all instances of hardcoded white, black, or gray colors with dynamically computed ones. <strong>This completed the dark theme implementation for the Tumma theme.</strong></p>
+<h3 id="results-1">Results</h3>
+<h4 id="dark-themed-parallel-plot">Dark themed parallel plot</h4>
+<p><img src="https://github.com/The-Broken-Keyboard/The-Broken-Keyboard.github.io/blob/main/dark_pair.png?raw=true" alt="Dark themed parallel plot"></p>
+<h4 id="dark-themed-bf-plot">Dark themed bf plot</h4>
+<p><img src="" alt="Dark themed bf plot"></p>
+<h4 id="dark-themed-forest-plot">Dark themed forest plot</h4>
+<p><img src="" alt="Dark themed forest plot"></p>
+<h3 id="next-steps">Next Steps</h3>
+<p>Looking ahead, our focus will shift to implementing the <strong>plot_lm</strong> function. This function is designed to <strong>plot the  credible intervals and mean of posterior predictive</strong>, alongside a <strong>scatter plot of observed data</strong>, specifically for regression-like datasets.</p>
+<p>We also decided to pause work on dist_plot enhancements (such as <code>circular variable support</code> and <code>dot plots</code>), since there is already ongoing work in that file.</p>
 
 			</div>
 
