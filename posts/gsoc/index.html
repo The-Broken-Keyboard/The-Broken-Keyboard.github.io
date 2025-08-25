@@ -365,11 +365,11 @@ However, in our current design choice, Plotly always forces shared labels along 
 <p>This required some changes to the way we handled data structures, but since the foundation was well set up earlier, the extension was not too difficult.We added support for multiple independent variables ( now it could handle multiple independent variables like x1, x2, x3 &hellip; which are used to predict single target variable y) and multiple CI interval bands ( now we can plot 90% interval band along with a 50% interval band together ). Additionally, we extended functionality to support a median line (in addition to the mean line) for predictions or posterior predictives.</p>
 <p>We also discussed adding a smoothing function to smooth CI interval lines and mean lines. Once this function is implemented in <strong>arviz-stats</strong>, it can be easily integrated into <strong>plot_lm</strong>.</p>
 <h3 id="results-2">Results</h3>
-<h3 id="lm_plot-with-multiple-ci_bands-and-multiple-independent-variables">lm_plot with multiple ci_bands and multiple independent variables</h3>
+<h4 id="lm_plot-with-multiple-ci_bands-and-multiple-independent-variables">lm_plot with multiple ci_bands and multiple independent variables</h4>
 <p><img src="https://github.com/The-Broken-Keyboard/The-Broken-Keyboard.github.io/blob/main/lm_multiple_ci.png?raw=true" alt="plot lm with multiple ci_bands"></p>
-<h3 id="lm_plot-with-single-ci_band-and-multiple-independent-variables">lm_plot with single ci_band and multiple independent variables</h3>
+<h4 id="lm_plot-with-single-ci_band-and-multiple-independent-variables">lm_plot with single ci_band and multiple independent variables</h4>
 <p><img src="https://github.com/The-Broken-Keyboard/The-Broken-Keyboard.github.io/blob/main/lm_single_ci.png?raw=true" alt="plot lm with single ci_band"></p>
-<h3 id="lm_plot-with-single-ci_band-and-single-independent-variable">lm_plot with single ci_band and single independent variable</h3>
+<h4 id="lm_plot-with-single-ci_band-and-single-independent-variable">lm_plot with single ci_band and single independent variable</h4>
 <p><img src="https://github.com/The-Broken-Keyboard/The-Broken-Keyboard.github.io/blob/main/lm_normal.png?raw=true" alt="plot lm with single ci_band and single independent variable"></p>
 <h3 id="ongoing-work">Ongoing Work</h3>
 <p>I am currently focusing on writing documentation and tests for the <strong>plot_lm</strong> function.</p>
